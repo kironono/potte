@@ -1,0 +1,30 @@
+{% extends 'base.jinja2' %}
+
+
+{% block title %}ログイン | {{ super() }}{% endblock %}
+
+
+{% block body_class %} class="notfound"{% endblock %}
+
+
+{% block body_content %}
+<section>
+  <div class="lockedpanel">
+    <div class="locked">
+      <i class="fa fa-lock"></i>
+      <h4>ログイン</h4>
+    </div>
+
+    <form action="{{ request.route_path('login') }}" method="post">
+      <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
+
+      <input type="text" class="form-control" placeholder="ユーザー名" name="username" value="">
+      <input type="password" class="form-control" placeholder="パスワード" name="password" value="">
+
+      <input class="btn btn-success btn-block" type="submit" value="ログイン">
+    </form>
+
+  </div><!-- lockedpanel -->
+
+</section>
+{% endblock %}

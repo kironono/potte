@@ -1,0 +1,67 @@
+{% extends '/base.jinja2' %}
+
+
+{% block body_content %}
+<section>
+
+  <div class="leftpanel">
+
+    <div class="logopanel">
+      <h1><span>[</span> potte <span>]</span></h1>
+    </div><!-- logopanel -->
+
+    <div class="leftpanelinner">
+
+      <h5 class="sidebartitle">Menu</h5>
+      <ul class="nav nav-pills nav-stacked nav-bracket">
+        <li><a href="{{ request.route_path('dashboard') }}"><i class="fa fa-home"></i> <span>ダッシュボード</span></a></li>
+        <li><a href="{{ request.route_path('dashboard') }}"><i class="fa fa-envelope-o"></i> <span>すべての写真</span></a></li>
+        <li><a href="{{ request.route_path('dashboard') }}"><i class="fa fa-th-list"></i> <span>アルバム</span></a></li>
+      </ul>
+
+    </div><!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+
+  <div class="mainpanel">
+
+    <div class="headerbar">
+
+      <div class="header-left">
+        <div class="topnav">
+          <ul class="nav nav-horizontal">
+            <li><a href="{{ request.route_path('upload') }}"><i class="fa fa-home"></i> <span>アップロード</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <ul class="headermenu">
+          <li>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <img src="http://www.gravatar.com/avatar/{{ request.user.email_hash }}?d=identicon" alt="" />
+                {{ request.user.username }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                <li><a href="{{ request.route_path('logout') }}"><i class="glyphicon glyphicon-log-out"></i> ログアウト</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div><!-- header-right -->
+
+    </div><!-- headerbar -->
+
+    {% block page_content %}
+    {% endblock %}
+
+  </div><!-- mainpanel -->
+
+
+
+
+</section>
+
+{% endblock %}

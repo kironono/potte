@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import os
 
 from setuptools import setup, find_packages
@@ -10,25 +12,30 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
 
 requires = [
     'pyramid',
-    'pyramid_chameleon',
     'pyramid_debugtoolbar',
+    'pyramid_jinja2',
     'pyramid_tm',
+    'pyramid_redis_sessions',
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
     'waitress',
-    ]
+    'colander',
+    'deform',
+    'click',
+    'werkzeug',
+]
 
 setup(name='potte',
       version='0.0',
       description='potte',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
-        "Programming Language :: Python",
-        "Framework :: Pyramid",
-        "Topic :: Internet :: WWW/HTTP",
-        "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
-        ],
+          "Programming Language :: Python",
+          "Framework :: Pyramid",
+          "Topic :: Internet :: WWW/HTTP",
+          "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+      ],
       author='',
       author_email='',
       url='',
@@ -42,6 +49,6 @@ setup(name='potte',
       [paste.app_factory]
       main = potte:main
       [console_scripts]
-      initialize_potte_db = potte.scripts.initializedb:main
+      potte = potte.scripts.potte:main
       """,
       )

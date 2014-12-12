@@ -1,0 +1,23 @@
+{% extends 'base.jinja2' %}
+
+
+{% block body_class %} class="signin"{% endblock %}
+
+
+{% block body_content %}
+<section>
+  <div class="signinpanel">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="logopanel">
+          <h1><span>[</span> potte <span>]</span></h1>
+        </div><!-- logopanel -->
+
+        <div class="mb20"></div>
+        <strong>サービスを利用するには<a href="{{ request.route_path('login') }}">ログイン</a>してください。</strong>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends '/mypage/base.jinja2' %}
+
+
+{% block title %}アップロード | {{ super() }}{% endblock %}
+
+
+{% block head_bottom %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/dropzone.css" />
+{% endblock %}
+
+
+{% block page_content %}
+<div class="pageheader">
+  <h2><i class="fa fa-home"></i> アップロード</h2>
+</div>
+
+<div class="contentpanel">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">写真をアップロード</h4>
+    </div>
+    <div class="panel-body">
+      <p>アップロードする写真をDrag &amp; Dropするか、ファイルを選択してください。</p>
+      <br />
+
+      <div id="file-upload-area" class="dropzone"></div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+
+{% block page_script %}
+<script src="/static/js/dropzone.min.js"></script>
+<script>
+  jQuery(document).ready(function() {
+    "use strict";
+
+    var uuid = "{{ album_uuid }}";
+
+    Dropzone.autoDiscover = false;
+
+    Dropzone.options.fileUploadArea = {
+      paramName: "file",
+      parallelUploads: 1,
+      acceptedFiles: "image/*",
+      maxFilesize: 16,
+      maxThumbnailFilesize: 16,
+      addRemoveLinks: true,
+      autoProcessQueue: true,
+      dictInvalidFileType: "画像ファイルのみアップロードできます。"
+    };
+
+    var file_upload_area = new Dropzone("div#file-upload-area", {
+      url: "{{ request.route_path('upload_file') }}"
+    });
+
+    file_upload_area.on("sending", function(file, xhr, formData) {
+      formData.append("uuid", uuid);
+    });
+
+  });
+</script>
+{% endblock %}
