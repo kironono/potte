@@ -50,10 +50,10 @@
                       <a href="{{ request.route_path('album', album_id=album.id) }}" class="pull-left">
                       </a>
                       <div class="media-body">
-                        <span class="media-meta pull-right">{{ album.created_at }}</span>
+                        <span class="media-meta pull-right">{{ album.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</span>
                         <h4 class="text-primary">{{ album.name }}</h4>
                         <small class="text-muted"></small>
-                        <p class="email-summary">xx件の写真</p>
+                        <p class="email-summary">{{ album.photos|length }}枚の写真</p>
                       </div>
                     </div>
                   </td>

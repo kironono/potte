@@ -1,0 +1,72 @@
+{% extends 'mypage/base.jinja2' %}
+
+
+{% block title %}{{ album.name }} | アルバム | {{ super() }}{% endblock %}
+
+
+{% block page_content %}
+<div class="pageheader">
+  <h2><i class="fa fa-home"></i> アルバム<span>{{ album.name }}</span></h2>
+</div>
+
+<div class="contentpanel">
+
+  <ul class="filemanager-options">
+    <li>
+      <div class="ckbox ckbox-default">
+        <input type="checkbox" id="selectall" value="1" />
+        <label for="selectall">すべて選択</label>
+      </div>
+    </li>
+    <li class="filter-type">
+      表示:
+      <a href="#" class="active">すべて</a>
+    </li>
+  </ul>
+
+
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="row filemanager">
+
+        {% for photo in album.photos %}
+        <div class="col-xs-6 col-sm-4 col-md-3 image">
+          <div class="thmb">
+            <div class="ckbox ckbox-default">
+              <input type="checkbox" id="check2" value="1" />
+              <label for="check2"></label>
+            </div>
+            <div class="btn-group fm-group">
+              <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu fm-menu" role="menu">
+                <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
+                <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
+                <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+              </ul>
+            </div><!-- btn-group -->
+            <div class="thmb-prev">
+              <a href="{{ request.route_path('photo', photo_id=photo.id) }}" data-rel="prettyPhoto">
+                <img src="{{ request.route_path('media_photo_original', photo_id=photo.id) }}" class="img-responsive" alt="{{ photo.filename }}" />
+              </a>
+            </div>
+            <h5 class="fm-title"><a href="">{{ photo.filename }}</a></h5>
+            <small class="text-muted">Added: {{ photo.created_at.strftime("%Y-%d-%d %H:%M:%S") }}</small>
+          </div><!-- thmb -->
+        </div><!-- col-xs-6 -->
+        {% endfor %}
+
+
+      </div><!-- row -->
+    </div><!-- col-sm-9 -->
+    <div class="col-sm-3">
+      <div class="fm-sidebar">
+        <button class="btn btn-primary btn-block">写真をアップロード</button>
+      </div>
+    </div><!-- col-sm-3 -->
+  </div>
+</div>
+{% endblock %}

@@ -5,11 +5,11 @@ import colander
 
 from pyramid.view import view_config
 from pyramid.security import Authenticated
-from pyramid.httpexceptions import HTTPBadRequest
+from pyramid.httpexceptions import HTTPBadRequest, HTTPNotFound
 
 from ..forms.upload import PhotoUploadSchema
 from ..apis.upload import registration_photo
-from ..apis.album import list_albums
+from ..apis.album import list_albums, get_album
 
 
 @view_config(route_name='dashboard', renderer='index.jinja2')
@@ -62,7 +62,13 @@ def albums_view(request):
 @view_config(route_name='album', effective_principals=Authenticated,
              renderer='mypage/album.jinja2')
 def album_view(request):
-    return {}
+    album_id = request.matchdict['album_id']
+    album = get_album(album_id, request.user.username)
+    if not album:
+        raise HTTPNotFound()
+    return {
+        'album': album,
+    }
 
 
 @view_config(route_name='photos', effective_principals=Authenticated,
