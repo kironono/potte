@@ -16,6 +16,8 @@ def includeme(config):
     config.add_route('photos', '/photos')
     config.add_route('photo', '/photo/{photo_id}')
 
+    config.add_route('media_photo_original', '/media/photo/{photo_id}/original')
+
     config.add_route('user', '/{username}')
     config.add_route('user_albums', '/{username}/albums')
     config.add_route('user_album', '/{username}/album/{album_id}')
