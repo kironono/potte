@@ -24,6 +24,7 @@ requires = [
     'deform',
     'click',
     'werkzeug',
+    'paginate',
 ]
 
 setup(name='potte',

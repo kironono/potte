@@ -1,0 +1,98 @@
+{% extends 'mypage/base.jinja2' %}
+
+
+{% block title %}アルバム | {{ super() }}{% endblock %}
+
+
+{% block page_content %}
+<div class="pageheader">
+  <h2><i class="fa fa-home"></i> アルバム</h2>
+</div>
+
+<div class="contentpanel panel-email">
+  <div class="row">
+    <div class="col-sm-3 col-lg-2">
+
+      <ul class="nav nav-pills nav-stacked nav-email">
+        <li class="active"><a href="#"><span class="badge pull-right">{{ album_count }}</span><i class="glyphicon glyphicon-star"></i> すべて</a></li>
+      </ul>
+
+    </div><!-- col-sm-3 -->
+
+
+    <div class="col-sm-9 col-lg-10">
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="pull-right">
+          </div><!-- pull-right -->
+
+          <h5 class="subtitle mb5">すべて</h5>
+          <p class="text-muted">{{ album_count }}件</p>
+
+          <div class="table-responsive">
+            <table class="table table-email">
+              <tbody>
+                {% for album in albums %}
+                <tr class="unread">
+                  <td>
+                    <div class="ckbox ckbox-success">
+                      <input type="checkbox" id="checkbox{{ loop.index }}">
+                      <label for="checkbox{{ loop.index }}"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <a href="" class="star"><i class="glyphicon glyphicon-star"></i></a>
+                  </td>
+                  <td>
+                    <div class="media">
+                      <a href="{{ request.route_path('album', album_id=album.id) }}" class="pull-left">
+                      </a>
+                      <div class="media-body">
+                        <span class="media-meta pull-right">{{ album.created_at }}</span>
+                        <h4 class="text-primary">{{ album.name }}</h4>
+                        <small class="text-muted"></small>
+                        <p class="email-summary">xx件の写真</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div><!-- table-responsive -->
+
+        </div><!-- panel-body -->
+      </div><!-- panel -->
+
+    </div><!-- col-sm-9 -->
+
+  </div><!-- row -->
+</div>
+{% endblock %}
+
+
+{% block page_script %}
+<script>
+  jQuery(document).ready(function() {
+    "use strict"
+    //Check
+    jQuery('.ckbox input').click(function() {
+      var t = jQuery(this);
+      if (t.is(':checked')) {
+        t.closest('tr').addClass('selected');
+      } else {
+        t.closest('tr').removeClass('selected');
+      }
+    });
+
+    // Read mail
+    jQuery('.table-email .media').click(function() {
+      var href = $(this).children('a').attr('href');
+      location.href = href;
+    });
+
+  });
+</script>
+{% endblock %}

@@ -6,6 +6,10 @@ from ..models import (
 )
 
 
+def list_albums(username):
+    return DBSession.query(Album).filter_by(username=username).all()
+
+
 def get_album(album_id, username):
     return DBSession.query(Album).filter_by(id=album_id) \
         .filter_by(username=username).first()
