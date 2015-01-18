@@ -9,7 +9,8 @@ from pyramid.httpexceptions import HTTPBadRequest, HTTPNotFound
 
 from ..forms.upload import PhotoUploadSchema
 from ..apis.upload import registration_photo
-from ..apis.album import list_albums, get_album
+from ..apis.album import list_albums, count_albums, get_album
+from ..apis.photo import list_photos, count_photos, get_photo
 
 
 @view_config(route_name='dashboard', renderer='index.jinja2')
@@ -52,7 +53,7 @@ def upload_file_view(request):
              renderer='mypage/albums.jinja2')
 def albums_view(request):
     albums = list_albums(request.user.username)
-    album_count = len(albums)
+    album_count = count_albums(request.user.username)
     return {
         'albums': albums,
         'album_count': album_count,
@@ -65,7 +66,7 @@ def album_view(request):
     album_id = request.matchdict['album_id']
     album = get_album(album_id, request.user.username)
     if not album:
-        raise HTTPNotFound()
+        raise HTTPNotFound(request.url)
     return {
         'album': album,
     }
@@ -74,10 +75,21 @@ def album_view(request):
 @view_config(route_name='photos', effective_principals=Authenticated,
              renderer='mypage/photos.jinja2')
 def photos_view(request):
-    return {}
+    photos = list_photos(request.user.username)
+    photo_count = count_photos(request.user.username)
+    return {
+        'photos': photos,
+        'photo_count': photo_count,
+    }
 
 
 @view_config(route_name='photo', effective_principals=Authenticated,
              renderer='mypage/photo.jinja2')
 def photo_view(request):
-    return {}
+    photo_id = request.matchdict['photo_id']
+    photo = get_photo(photo_id, request.user.username)
+    if not photo:
+        raise HTTPNotFound(request.url)
+    return {
+        'photo': photo,
+    }

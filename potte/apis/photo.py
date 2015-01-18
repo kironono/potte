@@ -17,6 +17,19 @@ def create_photo(photo_id, filename, username, created_at):
     return photo
 
 
+def list_photos(username):
+    return DBSession.query(Photo).filter_by(username=username).all()
+
+
+def count_photos(username):
+    return DBSession.query(Photo).filter_by(username=username).count()
+
+
+def get_photo(photo_id, username):
+    return DBSession.query(Photo).filter_by(id=photo_id) \
+        .filter_by(username=username).first()
+
+
 def get_photo_by_id(photo_id):
     return DBSession.query(Photo).filter_by(id=photo_id).first()
 
