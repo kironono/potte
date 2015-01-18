@@ -25,6 +25,7 @@ requires = [
     'click',
     'werkzeug',
     'paginate',
+    'Pillow',
 ]
 
 setup(name='potte',
