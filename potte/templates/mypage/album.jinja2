@@ -50,7 +50,7 @@
             </div><!-- btn-group -->
             <div class="thmb-prev">
               <a href="{{ request.route_path('photo', photo_id=photo.id) }}" data-rel="prettyPhoto">
-                <img src="{{ request.route_path('media_photo_original', photo_id=photo.id) }}" class="img-responsive" alt="{{ photo.filename }}" />
+                <img src="{{ request.route_path('media_photo_thumbnail', photo_id=photo.id, size='small') }}" class="img-responsive" alt="{{ photo.filename }}" />
               </a>
             </div>
             <h5 class="fm-title"><a href="">{{ photo.filename }}</a></h5>
@@ -64,7 +64,7 @@
     </div><!-- col-sm-9 -->
     <div class="col-sm-3">
       <div class="fm-sidebar">
-        <button class="btn btn-primary btn-block">写真をアップロード</button>
+        <a class="btn btn-primary btn-block" href="{{ request.route_path('upload') }}">写真をアップロード</a>
       </div>
     </div><!-- col-sm-3 -->
   </div>
