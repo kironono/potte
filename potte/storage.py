@@ -47,7 +47,7 @@ class PhotoStorage(object):
         shutil.copyfileobj(file, wf)
         file.seek(pos)
         wf.close()
-        return identity
+        return store_path
 
     def remove(self, photo_id):
         identity = self.calc_identity(photo_id)
