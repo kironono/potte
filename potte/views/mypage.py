@@ -87,9 +87,15 @@ def photos_view(request):
              renderer='mypage/photo.jinja2')
 def photo_view(request):
     photo_id = request.matchdict['photo_id']
+    album_id = request.GET.get("album_id")
+    if album_id:
+        album = get_album(album_id, request.user.username)
+    else:
+        album = None
     photo = get_photo(photo_id, request.user.username)
     if not photo:
         raise HTTPNotFound(request.url)
     return {
+        'album': album,
         'photo': photo,
     }

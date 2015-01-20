@@ -49,11 +49,11 @@
               </ul>
             </div><!-- btn-group -->
             <div class="thmb-prev">
-              <a href="{{ request.route_path('photo', photo_id=photo.id) }}" data-rel="prettyPhoto">
+              <a href="{{ request.route_path('photo', photo_id=photo.id, _query=dict(album_id=album.id)) }}" data-rel="prettyPhoto">
                 <img src="{{ request.route_path('media_photo_thumbnail', photo_id=photo.id, size='small') }}" class="img-responsive" alt="{{ photo.filename }}" />
               </a>
             </div>
-            <h5 class="fm-title"><a href="{{ request.route_path('photo', photo_id=photo.id) }}">{{ photo.filename }}</a></h5>
+            <h5 class="fm-title"><a href="{{ request.route_path('photo', photo_id=photo.id, _query=dict(album_id=album.id)) }}">{{ photo.filename }}</a></h5>
             <small class="text-muted">Added: {{ photo.created_at.strftime("%Y-%d-%d %H:%M:%S") }}</small>
           </div><!-- thmb -->
         </div><!-- col-xs-6 -->
