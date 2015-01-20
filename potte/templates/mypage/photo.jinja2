@@ -1,0 +1,82 @@
+{% extends 'mypage/base.jinja2' %}
+
+
+{% block title %}{{ photo.filename }} | {{ super() }}{% endblock %}
+
+
+{% block page_content %}
+<div class="pageheader">
+  <h2><i class="fa fa-home"></i> {{ photo.filename }}</h2>
+</div>
+
+<div class="contentpanel">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="panel panel-default widget-photoday">
+        <div class="panel-body">
+          <a href="#" class="photoday">
+            <img src="{{ request.route_path('media_photo_thumbnail', photo_id=photo.id, size='large') }}"></a>
+          <div class="photo-details">
+            <h4 class="photo-title">{{ photo.filename }}</h4>
+            <small class="text-muted">{{ photo.created_at }}</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <ul>
+            {% for album in photo.albums %}
+            <li><a href="{{ request.route_path('album', album_id=album.id) }}">{{ album.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+
+{% block apage_content %}
+<div class="pageheader">
+  <h2><i class="fa fa-home"></i> {{ photo.filename }}</h2>
+</div>
+
+<div class="contentpanel">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="panel panel-default widget-photoday">
+        <div class="panel-body">
+          <a href="#" class="photoday">
+            <img src="{{ request.route_path('media_photo_thumbnail', photo_id=photo.id, size='large') }}"></a>
+          <div class="photo-details">
+            <h4 class="photo-title">{{ photo.filename }}</h4>
+            <small class="text-muted">{{ photo.created_at }}</small>
+          </div>
+        </div>
+      </div>
+
+      {% for x in range(10) %}
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <ul>
+            {% for album in photo.albums %}
+            <li><a href="{{ request.route_path('album', album_id=album.id) }}">{{ album.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+</div><!-- contentpanel -->
+{% endblock %}

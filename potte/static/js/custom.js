@@ -55,7 +55,9 @@ jQuery(document).ready(function() {
       if(docHeight > jQuery('.mainpanel').height())
          jQuery('.mainpanel').height(docHeight);
    }
-   adjustmainpanelheight();
+   jQuery(document).load(function(){
+     adjustmainpanelheight();
+   });
    
    
    // Tooltip
